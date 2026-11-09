@@ -26,4 +26,4 @@ Every suite was run at least 3 times in a row by the reviewers with no flaky tes
 - **Other Node versions.** Only Node 24.12 was used. `engines` says ≥ 20.19; `better-sqlite3` ships prebuilt binaries for Node 20–24.
 - **Slowloris cut-off in real time.** `requestTimeout`/`headersTimeout` are asserted on the server object, not exercised with a 30-second dribbling client.
 - **Default ports on this Mac.** 8081, 8082 and 8091 are occupied by other local dev servers here; the READMEs show how to override every port. Graders' machines will differ.
-- **Nothing is committed.** The repo is initialized on `main` with no commits (held for your decision).
+- **Not pushed.** The work is committed locally on `main`; there is no remote yet (held for your decision).
