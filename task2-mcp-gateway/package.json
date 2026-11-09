@@ -1,0 +1,17 @@
+{
+  "name": "task2-mcp-gateway",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Task 2: MCP security gateway reverse proxy with Bearer-token role auth and tool-level authorization",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "dev:downstream": "tsx src/mock-downstream.ts",
+    "start": "node dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {}
+}

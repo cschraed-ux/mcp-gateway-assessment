@@ -1,0 +1,18 @@
+{
+  "name": "task3-llm-guardrail",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Task 3: LLM gateway streaming proxy with real-time PII redaction guardrail",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "dev:provider": "tsx src/mock-provider.ts",
+    "start": "node dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "bench": "tsx test/bench.ts"
+  },
+  "dependencies": {}
+}

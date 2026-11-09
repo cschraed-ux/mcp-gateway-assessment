@@ -1,0 +1,26 @@
+{
+  "name": "mcp-gateway-assessment",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Solution Architect assessment: MCP server, MCP security gateway, LLM streaming guardrail, rate-limiting model router",
+  "type": "module",
+  "engines": { "node": ">=20.19" },
+  "workspaces": [
+    "task1-mcp-server",
+    "task2-mcp-gateway",
+    "task3-llm-guardrail",
+    "task4-model-router"
+  ],
+  "scripts": {
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "npm test --workspaces",
+    "build": "npm run build --workspaces",
+    "check": "npm run typecheck && npm test && npm run build && node scripts/check-duplicates.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.0"
+  }
+}

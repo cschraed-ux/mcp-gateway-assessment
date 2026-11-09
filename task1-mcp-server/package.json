@@ -1,0 +1,20 @@
+{
+  "name": "task1-mcp-server",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Task 1: MCP server over stdio with strict Zod validation (get_customer_record, trigger_refund)",
+  "main": "dist/index.js",
+  "bin": { "task1-mcp-server": "dist/index.js" },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  }
+}
