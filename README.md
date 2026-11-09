@@ -23,9 +23,9 @@ Per task: `cd task1-mcp-server && npm test` (same for the others). Each README h
 with `curl`.
 
 ## Conventions
-See [`AGENTS.md`](AGENTS.md) for the stack, the design bar and the known gotchas. Decisions made
-without asking are in [`DECISIONS.md`](DECISIONS.md); verification status is in
-[`TESTING.md`](TESTING.md).
+See [`AGENTS.md`](AGENTS.md) for the stack, the design bar and the known gotchas. Design
+decisions and their rationale are in [`DECISIONS.md`](DECISIONS.md); what was verified, and how,
+is in [`TESTING.md`](TESTING.md).
 
 ## Dependency policy
 Only what the assessment names: `@modelcontextprotocol/sdk` and `zod` for Task 1,

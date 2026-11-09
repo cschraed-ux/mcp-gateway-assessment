@@ -1,11 +1,11 @@
-# AGENTS.md — conventions for everyone working in this repo
+# AGENTS.md — conventions for anyone (or any coding agent) working in this repo
 
 This repository answers a four-task Solution Architect assessment (MCP servers, MCP gateways,
 LLM gateways, security guardrails). Each task lives in its own workspace and must be
 **runnable and gradable on its own**: a grader will `cd` into one task folder, read its README,
 run `npm test`, and run the server. Never make one task import from another.
 
-## Stack (pinned by the PM; do not change versions or add dependencies without asking the PM)
+## Stack (pinned; do not change versions or add dependencies casually)
 - Node 24 (`.nvmrc`), TypeScript 5.9 strict (`tsconfig.base.json`), ESM (`"type": "module"`).
   Local imports therefore need the `.js` extension: `import { x } from "./foo.js"`.
 - Tests: vitest 4 (`test/**/*.test.ts`), run with `npm test` in the task folder.
@@ -66,6 +66,7 @@ that are not in the allow-list, and duplicate test names).
 - better-sqlite3 is synchronous; wrap check-and-reserve in `db.transaction(...)` and open with
   `pragma journal_mode = WAL` and `busy_timeout`.
 
-## Agents
-Agents never ask the user questions. Put open questions in your final report; the PM records
-them in `QUESTIONS.md`. Stay inside the files you own.
+## Working in parallel
+When several people or agents work at once, each owns a disjoint set of files; shared contracts
+(this file, `tsconfig.base.json`, each `package.json`) change only by agreement. Record design
+choices in `DECISIONS.md`.

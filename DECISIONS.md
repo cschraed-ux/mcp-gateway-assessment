@@ -1,13 +1,12 @@
-# DECISIONS.md — choices made on your behalf
+# DECISIONS.md — design decisions and their rationale
 
-You asked for autonomy, so these were decided without asking. Change any of them and I will
-rework the affected task.
+Every non-obvious choice in this repository, numbered so READMEs and tests can refer to them.
+Sub-numbered rows (7a, 9a, ...) refine the decision they follow.
 
 | # | Decision | Why |
 |---|---|---|
-| 1 | **Build all four tasks** of the assessment, each as a standalone, runnable workspace. | You said "build all". |
+| 1 | **All four tasks** are answered, each as a standalone, runnable workspace. | Each task is graded on its own; nothing should depend on another folder. |
 | 2 | **TypeScript / Node.js** for every task. | Matches the assessment's own examples (`@modelcontextprotocol/sdk`, Zod, Node.js proxies) and keeps one toolchain for graders. |
-| 3 | **Code lives in `/Users/chad/Apps/mcp-gateway-assessment`**, a new folder next to your other apps, with its own git repo. | The session had no folder; a take-home should not live in a folder the app deletes with the session. Move it anywhere later. |
 | 4 | **npm workspaces monorepo**, but **no shared code between tasks**. | Graders cd into one task; each must stand alone. Workspaces only share `node_modules` and the root `npm run check`. |
 | 5 | **No HTTP framework** (Express/Fastify). Built-in `node:http` + global `fetch`. | A proxy assessment is about understanding the wire format and streams; a framework hides exactly what is being graded, and it keeps the dependency tree tiny. |
 | 6 | **Zod 4** for Task 1 validation (the SDK supports it natively). | Current major; the SDK 1.32 docs use it. |
@@ -20,7 +19,6 @@ rework the affected task.
 | 12 | Task 4 uses **better-sqlite3** (synchronous, WAL mode) rather than Node's built-in `node:sqlite`. | `node:sqlite` still prints an ExperimentalWarning on Node 24 and is absent on Node 20; better-sqlite3 has prebuilt binaries and gives atomic check-and-reserve transactions. |
 | 13 | Task 4 rate limiter **reserves an estimated token count at admission** (chars/4 of prompt + requested max_tokens) and **reconciles to actual usage** after the response. | A token-aware limiter cannot know the real count before the call; reserve-then-settle prevents a burst of concurrent requests from all passing the check. |
 | 14 | Task 4 standard error payload: `{ "error": { "code", "type", "message", "request_id", "retryable" } }` with HTTP status mapped from `type`. | One shape for every failure, nothing from upstream copied into it. |
-| 15 | The finished work is **committed locally** on `main` (one commit) but **not pushed**: there is no remote. | A local commit is reversible and records the reviewed state; pushing needs a GitHub repo you create, which is a held question. |
 | 9a | Task 2 pipeline order is route → method → Origin → Content-Type → **auth → body cap → parse**, so an unauthenticated caller never makes the gateway buffer or parse anything. HTTP statuses: -32001 → 403, -32002 (no/invalid token) → 401, parse/invalid request → 400, downstream failure -32003 → 502, downstream answers (including its own JSON-RPC errors) → 200. `tools/call` without a tool name → -32602 with the request id echoed. | Fail closed and cheap to reject; status codes follow the HTTP meaning while the JSON-RPC body carries the precise code. |
 | 9b | Task 2 forwards `tools/list` **unchanged** for every role, as the statement says; filtering `admin_*` tools out of a viewer's list is noted in its README as a production improvement, not done. | The statement is explicit; hiding tools is a UX nicety, denial at call time is the security control. |
 
